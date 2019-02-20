@@ -1,0 +1,91 @@
+{% load urlify %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" type="text/css" href='{% static "blog/css/post_detail.css" %}'>
+</head>
+<body style="background-color: black">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<nav class="navbar navbar-inverse" style="background-color: #00173d">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">BlogBuzz!</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li><a>All blogs</a></li>
+      <li><a href="#">My Blogs</a></li>
+      <li><a href="#">Create</a></li>
+      <li><a href="./contact/">Contact Us</a></li>
+    </ul>
+    <form class="navbar-form navbar-left" action="/action_page.php">
+	  <div class="input-group">
+	    <input type="text" class="form-control" placeholder="Search">
+	    <div class="input-group-btn">
+	      <button class="btn btn-default" type="submit">
+	        <i class="glyphicon glyphicon-search"></i>
+	      </button>
+	    </div>
+	  </div>
+	</form>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="col-sm-1"></div>
+
+<div class="col-sm-10 center-block" style="margin-top: 20px">
+    <div class="hovereffect center-block">
+        <img class="img-responsive" src='{{instance.image.url}}' alt="">
+        <div class="overlay">
+           <h2>{{instance.title }}</h2>
+           <a class="info" href="#" style="margin-top: 5%"><h3>{{instance.title}}<small>{% if instance.draft %}<span style='color:red'>  Draft</span>{% endif %}</h3>
+			<h4>on {{instance.publish}}</h4>
+			<p>Author: {{instance.user}}</p>
+			<p>
+			{{instance.body}}
+			</p>
+
+			</br>
+      <p>
+      <div class="fb-like" data-href="{{request.build_absolute_uri}}" data-layout="box_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+      </p>
+      
+      <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5">
+      </div> 
+      </br>
+      
+			<hr/></a>
+      <p align="bottom">
+      <a href="{{instance.get_absolute_url }}/edit/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update Blog</a>
+      <a href="{{instance.get_absolute_url }}/delete/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Delete Blog</a>
+      </p>
+        </div>
+    </div>
+</div>
+<div class="col-sm-1"></div>
+
+</body>
+</html>
